@@ -1,0 +1,14 @@
+*
+
+!*.gitignore
+
+!*.c
+!*/
+!*.h
+!*.sh
+!*.md
+!*.java
+!*.sql
+!*.html
+!*.xml
+!*.jsp
