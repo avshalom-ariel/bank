@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const Account = require('../models/account');
 const jwt = require('jsonwebtoken');
+const nodemailer = require('nodemailer');
 
 // Login user and generate JWT
 exports.loginUser = async (req, res) => {

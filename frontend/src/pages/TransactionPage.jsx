@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../styles/styles.css';
 import {useNavigate} from "react-router-dom";
-import Cookies from "js-cookie";  // Assuming you have an external CSS file for styling
+import Graph from '../components/Graph.js';
+import Header from "../components/Header.js";
 
 const TransactionPage = () => {
     const [transactions, setTransactions] = useState([]);  // Store transaction data
@@ -18,14 +19,11 @@ const TransactionPage = () => {
 
     const [userData, setUserData] = useState(null);
 
-    // let token = sessionStorage.getItem('token');
     const fetchTransactions = async () => {
         try {
             let token = sessionStorage.getItem('token');
-
-            const response = await axios.get('http://localhost:3003/transactions', { headers: {"Authorization" : `Bearer ${token}`} });
+            const response = await axios.get('http://localhost:3003/api/transactions', { headers: {"Authorization" : `Bearer ${token}`} });
             setTransactions(response.data.transactions);
-            console.log("response data: " + response.data.transactions);
         } catch (err) {
             setError('Failed to fetch transactions');
         } finally {
@@ -37,7 +35,7 @@ const TransactionPage = () => {
         try {
             let token = sessionStorage.getItem('token');
 
-            let response = await axios.get("http://localhost:3003/auth", { headers: {"Authorization" : `Bearer ${token}`} })
+            let response = await axios.get("http://localhost:3003/api/auth", { headers: {"Authorization" : `Bearer ${token}`} })
 
             let user = response.data.user;
 
@@ -70,16 +68,13 @@ const TransactionPage = () => {
 
         try {
             let token = sessionStorage.getItem('token');
-            console.log("token is: " + token);
-            const response = await axios.post('http://localhost:3003/transactions', {
-                // senderUser: user, //transactionData.senderUser,
+
+            const response = await axios.post('http://localhost:3003/api/transactions', {
                 receiverEmail: transactionData.receiverEmail,
                 amount: transactionData.amount,
             }, {headers: {"Authorization" : `Bearer ${token}`}});
-            console.log("response is: " + response);
 
             if (response.status < 300 && response.status >= 200) {
-                // setTransactions([...transactions, response.data.transaction]);
 
                 console.log(response.data.transaction);
                 setTransactions((prevTransactions) => [
@@ -98,11 +93,10 @@ const TransactionPage = () => {
         } catch (err) {
             setError('also Failed to send transaction');
         } finally {
-            setIsSubmitting(false);  // Re-enable the button
+            setIsSubmitting(false);
         }
     };
 
-    // Handle form input changes
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setTransactionData((prevState) => ({
@@ -123,7 +117,9 @@ const TransactionPage = () => {
 
     return (
         <div className="transaction-page">
+            <Header />
             <h1>Transaction Page For {userData.name}</h1>
+            <h1>Current balance: {userData.balance}</h1>
 
             <form onSubmit={handleSubmitTransaction} className="transaction-form">
                 <label>
@@ -131,22 +127,25 @@ const TransactionPage = () => {
                     <input
                         type="text"
                         name="receiverEmail"
+                        className="input"
                         value={transactionData.receiverEmail}
                         onChange={handleInputChange}
                         required
                     />
-                </label>
+                </label><br></br><br></br>
                 <label>
                     Amount:
                     <input
                         type="number"
                         name="amount"
+                        className="input"
                         value={transactionData.amount}
                         onChange={handleInputChange}
                         required
                     />
                 </label>
-                <button type="submit" disabled={isSubmitting}>Send Transaction</button>
+                <br></br><br></br>
+                <button type="submit" className="button" disabled={isSubmitting}>Send Transaction</button>
             </form>
 
             <table className="transaction-table">
@@ -171,16 +170,26 @@ const TransactionPage = () => {
                 ))}
                 </tbody>
             </table>
-            <div className="profile-footer">
-                <button className="logout-button" onClick={handleLogout}>
-                    Logout
-                </button>
+            <div>
+                <br></br>
+                <h1>Balance graph</h1>
+            </div>
+            <div className="container">
+                <Graph/>
             </div>
             <div className="profile-footer">
-                <button className="logout-button" onClick={handleNavigateToProfile}>
+                <button className="button" onClick={handleLogout}>
+                    Logout
+                </button>
+                <button className="button" onClick={handleNavigateToProfile}>
                     Profile
                 </button>
             </div>
+            {/*<div className="profile-footer">*/}
+            {/*    <button className="button" onClick={handleNavigateToProfile}>*/}
+            {/*        Profile*/}
+            {/*    </button>*/}
+            {/*</div>*/}
         </div>
     );
 };

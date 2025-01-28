@@ -11,6 +11,8 @@ import RegistrationPage from "./pages/RegistrationPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
 import TransactionPage from "./pages/TransactionPage.jsx";
+import AboutPage from "./pages/AboutPage.jsx";
+import ContactPage from "./pages/ContactPage.jsx";
 
 const router = createBrowserRouter([
     {path: '/', element: <HomePage />},
@@ -20,6 +22,9 @@ const router = createBrowserRouter([
     {path: '/not-found', element: <NotFoundPage />},
     {path: '/profile', element: <ProfilePage />},
     {path: '/transactions', element: <TransactionPage />},
+    {path: '/about', element: <AboutPage />},
+    {path: '/contact', element: <ContactPage />},
+
 ])
 
 const root = createRoot(document.getElementById("root"));

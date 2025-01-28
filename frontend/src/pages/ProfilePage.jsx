@@ -3,7 +3,8 @@ import { useLocation } from 'react-router-dom';
 import '../styles/styles.css';  // Importing the CSS file
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";  // Import useNavigate hook
-import Cookies from 'js-cookie';  // Import js-cookie to handle cookies easily
+import Cookies from 'js-cookie';
+import Header from "../components/Header.js";  // Import js-cookie to handle cookies easily
 
 
 const ProfilePage = () => {
@@ -16,7 +17,7 @@ const ProfilePage = () => {
             try {
                 let token = sessionStorage.getItem('token');
 
-                let response = await axios.get("http://localhost:3003/auth", { headers: {"Authorization" : `Bearer ${token}`} })
+                let response = await axios.get("http://localhost:3003/api/auth", { headers: {"Authorization" : `Bearer ${token}`} })
 
                 let user = response.data.user;
 
@@ -53,12 +54,13 @@ const ProfilePage = () => {
 
     return (
         <div className="profile-container">
+            <Header />
             <div className="profile-header">
                 <h1>Welcome, {userData.name}!</h1>
                 {/*<p className="email">Email: {user.email}</p>*/}
             </div>
             <div className="profile-info">
-                <h3>User Information</h3>
+                <h3>User Information</h3><br></br>
                 <div className="info-item">
                     <strong>Name:</strong> {userData.name}
                 </div>
@@ -73,15 +75,18 @@ const ProfilePage = () => {
                 </div>
             </div>
             <div className="profile-footer">
-                <button className="logout-button" onClick={handleLogout}>
+                <button className="button" onClick={handleLogout}>
                     Logout
                 </button>
-            </div>
-            <div className="profile-footer">
-                <button className="logout-button" onClick={handleNavigateToTransactions}>
+                <button className="button" onClick={handleNavigateToTransactions}>
                     Transactions
                 </button>
             </div>
+            {/*<div className="profile-footer">*/}
+            {/*    <button className="=button" onClick={handleNavigateToTransactions}>*/}
+            {/*        Transactions*/}
+            {/*    </button>*/}
+            {/*</div>*/}
         </div>
     );
 };

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../styles/styles.css';
+import Header from "../components/Header.js";
 
 axios.defaults.withCredentials = true;
 
@@ -25,19 +26,21 @@ const LoginPage = () => {
         setError('');
 
         try {
-            const response = await axios.post('http://localhost:3003/user/login', {
+            const response = await axios.post('http://localhost:3003/api/user/login', {
                 email: email,
                 password: password
             });
 
             if (response.status !== 200) {
-                throw new Error('Login failed, please try again.');
+                setError('Failed, please try again.');
+            } else {
+                sessionStorage.setItem('token', response.data.token);
+                navigate('/profile');
             }
 
-            sessionStorage.setItem('token', response.data.token);
-            navigate('/profile');
         } catch (err) {
-            setError(err.message || 'An error occurred');
+            // setError(err.message || 'An error occurred');
+            setError('Failed, please try again.');
         } finally {
             setIsLoading(false);
         }
@@ -45,7 +48,8 @@ const LoginPage = () => {
 
     return (
         <div className="login-container">
-            <h2>Login to Your Account</h2>
+            <Header />
+            <h2>Login to Your Account</h2><br></br>
             {error && <div className="error">{error}</div>}
             <form onSubmit={handleSubmit}>
                 <div className="input-container">
@@ -58,6 +62,7 @@ const LoginPage = () => {
                         placeholder="Enter your email"
                     />
                 </div>
+                <br></br>
                 <div className="input-container">
                     <label>Password</label>
                     <input
@@ -68,6 +73,8 @@ const LoginPage = () => {
                         placeholder="Enter your password"
                     />
                 </div>
+                <br></br>
+
                 <button type="submit" className="button" disabled={isLoading}>
                     {isLoading ? 'Logging in...' : 'Login'}
                 </button>

@@ -1,8 +1,6 @@
 
 const Account = require('../models/account');
 
-
-
 exports.getAuth = async (req, res) => {
 
     const { userId } = req.user;
@@ -19,6 +17,4 @@ exports.getAuth = async (req, res) => {
         console.error(err);
         res.status(500).json({ message: 'Error processing Authentication' });
     }
-
-
 }

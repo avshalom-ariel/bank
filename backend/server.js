@@ -12,27 +12,23 @@ const transactionRoutes = require('./routes/transactionRoutes');
 
 const app = express();
 
-dotenv.config();
 
 const corsOptions = {
-    origin: 'http://localhost:3000', // The client origin
-    credentials: true, // Allow credentials (cookies)
+    origin: 'http://localhost:3000',
+    credentials: true,
 };
 
 // Middleware
-app.use(cors(corsOptions)); // Enable CORS
-app.use(bodyParser.json()); // Parse incoming JSON requests
-app.use(cookieParser()); // Use cookie parser
+app.use(cors(corsOptions));
+app.use(bodyParser.json());
+app.use(cookieParser());
 
 const options = {
     useNewUrlParser: true,
     useUnifiedTopology: true
 };
 
-// const mongoURI = "mongodb+srv://avshalomariel:1234@cluster0.z9q8z.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 mongoose.connect(process.env.MONGO_URI, options)
-// mongoose.connect(mongoURI, options)
-
     .then(() => {
         console.log('Database connected successfully');
     })
@@ -41,20 +37,15 @@ mongoose.connect(process.env.MONGO_URI, options)
     });
 
 // Routes
-app.use('/user', accountRoutes);
-app.use('/auth', authRoutes);
-app.use('/transactions', transactionRoutes);
-
-// app.get('/', (req, res) => {
-//     res.send('Welcome to the Bank API');
-// });
+app.use('/api/user', accountRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/transactions', transactionRoutes);
 
 app.use((err, req, res, next) => {
      console.error(err);
     res.status(500).json({ message: 'Something went wrong!' });
 });
 
-// Start the serve
 const PORT = process.env.PORT || 3003;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);

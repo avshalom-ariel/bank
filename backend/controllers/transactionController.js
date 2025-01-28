@@ -59,8 +59,6 @@ exports.createTransaction = async (req, res) => {
         res.status(201).json({
             message: 'Transaction successful',
             transaction,
-            // sender: senderAccount,
-            // receiver: receiverAccount,
         });
     } catch (err) {
         console.log("Transaction failed with error: ", err);

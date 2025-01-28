@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import '../styles/styles.css';  // Import the CSS file
+import '../styles/styles.css';
+import Header from "../components/Header.js";  // Import the CSS file
 
 const RegisterPage = () => {
     const [email, setEmail] = useState('');
@@ -30,7 +31,7 @@ const RegisterPage = () => {
         console.log('Registering with', { email, password });
 
         const register = async () => {
-            let response = await axios.post('http://localhost:3003/user/register', {
+            let response = await axios.post('http://localhost:3003/api/user/register', {
                 name: name,
                 password: password,
                 email: email,
@@ -49,18 +50,20 @@ const RegisterPage = () => {
 
         try {
             await register();
+            navigate('/profile');
         } catch (error) {
             console.log('Error is: ' + error);
             setError(error);
             navigate('/');
         }
 
-        navigate('/profile');
+        // navigate('/profile');
     };
 
     return (
         <div className="register-container">
-            <h2>Create an Account</h2>
+            <Header/>
+            <h2>Create an Account</h2><br></br>
             {error && <div className="error">{error}</div>}
             <form onSubmit={handleSubmit}>
                 <div className="input-container">
@@ -73,6 +76,7 @@ const RegisterPage = () => {
                         placeholder="Enter your name"
                     />
                 </div>
+                <br></br>
                 <div className="input-container">
                     <label>Email</label>
                     <input
@@ -83,6 +87,7 @@ const RegisterPage = () => {
                         placeholder="Enter your email"
                     />
                 </div>
+                <br></br>
                 <div className="input-container">
                     <label>Password</label>
                     <input
@@ -93,6 +98,7 @@ const RegisterPage = () => {
                         placeholder="Enter your password"
                     />
                 </div>
+                <br></br>
                 <div className="input-container">
                     <label>Confirm Password</label>
                     <input
@@ -103,6 +109,7 @@ const RegisterPage = () => {
                         placeholder="Confirm your password"
                     />
                 </div>
+                <br></br>
                 <div className="input-container">
                     <label>Phone</label>
                     <input
@@ -113,6 +120,7 @@ const RegisterPage = () => {
                         placeholder="Enter your phone number"
                     />
                 </div>
+                <br></br>
                 <button type="submit" className="button">Register</button>
             </form>
             <div className="redirect">
@@ -123,44 +131,3 @@ const RegisterPage = () => {
 };
 
 export default RegisterPage;
-
-// const styles = {
-//     container: {
-//         maxWidth: '400px',
-//         margin: 'auto',
-//         padding: '20px',
-//         backgroundColor: '#f9f9f9',
-//         borderRadius: '8px',
-//         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-//     },
-//     inputContainer: {
-//         marginBottom: '15px',
-//     },
-//     input: {
-//         width: '100%',
-//         padding: '10px',
-//         marginTop: '5px',
-//         borderRadius: '5px',
-//         border: '1px solid #ccc',
-//     },
-//     button: {
-//         width: '100%',
-//         padding: '12px',
-//         backgroundColor: '#007bff',
-//         color: 'white',
-//         border: 'none',
-//         borderRadius: '5px',
-//         fontSize: '16px',
-//         cursor: 'pointer',
-//     },
-//     error: {
-//         color: 'red',
-//         marginBottom: '10px',
-//     },
-//     redirect: {
-//         marginTop: '10px',
-//         textAlign: 'center',
-//     },
-// };
-
-// export default RegisterPage;
