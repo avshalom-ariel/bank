@@ -1,9 +1,7 @@
-// routes/transactionRoutes.js
 const express = require('express');
 const authToken = require('../middleware/authMiddleware');  // Your path here
 
 const router = express.Router();
-// Import the transaction controller
 
 const transactionControllers = require('../controllers/transactionController');
 

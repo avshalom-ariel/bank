@@ -5,14 +5,12 @@ const { sendMessage } = require('../SocketServer');
 exports.createTransaction = async (req, res) => {
     try {
         const { userId } = req.user;
-
         const { receiverEmail, amount } = req.body;
 
         if (!receiverEmail || !amount || amount <= 0) {
             return res.status(400).json({ message: 'Invalid transaction details' });
         }
 
-        // Find the sender and receiver accounts
         const senderAccount = await Account.findById(userId);
         const receiverAccount = await Account.findOne({ email: receiverEmail });
 

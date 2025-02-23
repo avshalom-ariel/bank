@@ -1,4 +1,3 @@
-// server/utils/email.js
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
@@ -15,7 +14,7 @@ const sendVerificationEmail = async (userEmail, userId) => {
         );
 
         // Create a verification URL with the token
-        const verificationUrl = `http://yourfrontend.com/verify-email?token=${verificationToken}`;
+        const verificationUrl = `http://` + process.env.FRONTEND_URI+ `/verify-email?token=${verificationToken}`;
 
         // Set up email transporter (using Gmail here, but you can use other services like SendGrid)
         const transporter = nodemailer.createTransport({

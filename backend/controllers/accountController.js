@@ -44,6 +44,7 @@ exports.loginUser = async (req, res) => {
     }
 };
 
+// Register user and generate JWT
 exports.registerUser = async (req, res) => {
     console.log("Registration request received");
     try {

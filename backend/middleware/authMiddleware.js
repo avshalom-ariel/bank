@@ -2,19 +2,12 @@ const jwt = require('jsonwebtoken');
 
 const authenticateToken = (req, res, next) => {
     try {
-        console.log("auth request received");
-
         const token = getTokenFromHeader(req.headers);  // Get the token from the cookies
-
-        console.log("authentication token: " + token);
-
         if (!token) {
             return res.status(401).json({ message: 'Access denied. No token provided.' });
         }
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-        console.log("decoded token: " + decoded);
 
         req.user = decoded;
 

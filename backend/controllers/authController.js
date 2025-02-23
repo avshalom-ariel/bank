@@ -2,7 +2,6 @@
 const Account = require('../models/account');
 
 exports.getAuth = async (req, res) => {
-
     const { userId } = req.user;
 
     try {
