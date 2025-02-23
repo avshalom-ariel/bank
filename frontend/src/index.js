@@ -6,7 +6,6 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 
 import HomePage from "./pages/HomePage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
-import DashboardPage from "./pages/DashboardPage.jsx";
 import RegistrationPage from "./pages/RegistrationPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
@@ -20,7 +19,6 @@ const router = createBrowserRouter([
     {path: '/', element: <HomePage />},
     {path: '/login', element: <LoginPage />},
     {path: '/register', element: <RegistrationPage />},
-    {path: '/dashboard', element: <DashboardPage />},
     {path: '/not-found', element: <NotFoundPage />},
     {path: '/profile', element: <ProfilePage />},
     {path: '/transactions', element: <TransactionPage />},
@@ -32,10 +30,9 @@ const router = createBrowserRouter([
 
 const root = createRoot(document.getElementById("root"));
 root.render(
-    // <StrictMode>
+    <StrictMode>
         <SocketProvider>
             <RouterProvider router={router} />
         </SocketProvider>
-
-    // </StrictMode>
+    </StrictMode>
 );

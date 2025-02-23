@@ -13,7 +13,7 @@ const MessagesPage = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [userData, setUserData] = useState(null);
     const numOfMessagesToShow = 10;
-    const url = process.env.BANK_APP_URL + '/api/user/messages';
+    const url = 'http://localhost:3003/api/user/messages';
     const { socket } = useSocket();
 
     const fetchMessages = async () => {
@@ -23,7 +23,7 @@ const MessagesPage = () => {
                 setError('Please log in.');
                 return;
             }
-            const response = await axios.get('http://localhost:3003/api/user/messages', { headers: {"Authorization" : `Bearer ${token}`} });
+            const response = await axios.get(url, { headers: {"Authorization" : `Bearer ${token}`} });
             setMessages(response.data.messages);
         } catch (err) {
             setError('Failed to fetch messages');

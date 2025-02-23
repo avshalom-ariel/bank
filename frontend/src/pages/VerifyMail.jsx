@@ -4,13 +4,14 @@ import { useLocation } from 'react-router-dom';
 
 const VerifyEmail = () => {
     const [message, setMessage] = useState('');
-    const { search } = useLocation(); // To get the query params (token)
+    const { search } = useLocation();
+    const url = 'http://localhost:3003/api/auth/verify-email';
     const token = new URLSearchParams(search).get('token');
 
     useEffect(() => {
         const verifyEmail = async () => {
             try {
-                const response = await fetch('http://localhost:3003/api/auth/verify-email', {
+                const response = await fetch(url, {
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${token}`

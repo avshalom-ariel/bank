@@ -56,14 +56,11 @@ const RegisterPage = () => {
             setError(error);
             navigate('/');
         }
-
-        // navigate('/profile');
     };
 
     return (
         <div className="container">
             <Header/>
-            {/*<h2>Create an Account</h2><br></br>*/}
             <div className="hero-section">
                 <h2 className="hero-heading">Create an Account</h2><br></br>
             </div>

@@ -13,8 +13,6 @@ const LoginPage = () => {
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const { socket } = useSocket(); // Access socket from context
-
-
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -40,17 +38,14 @@ const LoginPage = () => {
             } else {
                 if (socket) {
                     socket.emit('connectUser', email);  // Send userId to server
-                    console.log('Socket emmited due to: ' + socket);
                 } else {
                     console.log('Socket was not emitted');
                 }
-
 
                 sessionStorage.setItem('token', response.data.token);
                 navigate('/profile');
             }
         } catch (err) {
-            // setError(err.message || 'An error occurred');
             setError('Failed, please try again.');
         } finally {
             setIsLoading(false);

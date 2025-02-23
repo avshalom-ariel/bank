@@ -20,26 +20,7 @@ const ContactUsPage = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // You can integrate your backend logic here to send the form data
         setFormSubmitted(true);
-    };
-
-    const StyledComponent = () => {
-        // Define styles as a JavaScript object
-        const styles = {
-            style: {
-                padding: '20px',
-                backgroundColor: '#f0f0f0',
-                borderRadius: '5px',
-                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-            },
-        };
-
-        return (
-            <div style={styles.style}>
-
-            </div>
-        );
     };
 
     return (
@@ -68,17 +49,6 @@ const ContactUsPage = () => {
                     </div>
                 ) : (
                     <form onSubmit={handleSubmit}>
-                        {/*<div className="input-container">*/}
-                        {/*    <label htmlFor="name">Name</label>*/}
-                        {/*    <input*/}
-                        {/*        type="text"*/}
-                        {/*        id="name"*/}
-                        {/*        name="name"*/}
-                        {/*        value={formData.name}*/}
-                        {/*        onChange={handleChange}*/}
-                        {/*        required*/}
-                        {/*    />*/}
-                        {/*</div>*/}
                         <div className="input-container">
                             <label>Name</label>
                             <input

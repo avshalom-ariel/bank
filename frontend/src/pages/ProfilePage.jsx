@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import '../styles/styles.css';  // Importing the CSS file
+import '../styles/styles.css';
 import { useNavigate } from 'react-router-dom';
-import axios from "axios";  // Import useNavigate hook
-import Cookies from 'js-cookie';
-import Header from "../components/Header.js";  // Import js-cookie to handle cookies easily
+import axios from "axios";
+import Header from "../components/Header.js";
 
 
 const ProfilePage = () => {
@@ -81,11 +79,6 @@ const ProfilePage = () => {
                     Transactions
                 </button>
             </div>
-            {/*<div className="profile-footer">*/}
-            {/*    <button className="=button" onClick={handleNavigateToTransactions}>*/}
-            {/*        Transactions*/}
-            {/*    </button>*/}
-            {/*</div>*/}
         </div>
     );
 };

@@ -211,11 +211,6 @@ const TransactionPage = () => {
                     Profile
                 </button>
             </div>
-            {/*<div className="profile-footer">*/}
-            {/*    <button className="button" onClick={handleNavigateToProfile}>*/}
-            {/*        Profile*/}
-            {/*    </button>*/}
-            {/*</div>*/}
         </div>
     );
 };
